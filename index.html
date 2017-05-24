@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title></title>
+
+        <script>
+
+            var cards = ["emoji-1.png","emoji-2.png","emoji-3.png","emoji-4.png","emoji-5.png", "emoji-6.png","emoji-7.png","emoji-8.png","emoji-9.png","emoji-10.png","emoji-1.png","emoji-2.png","emoji-3.png","emoji-4.png","emoji-5.png", "emoji-6.png","emoji-7.png","emoji-8.png","emoji-9.png","emoji-10.png"];
+
+            var pushtwo = 0;
+            var move=0;
+
+            function prin(){
+
+                cards = shuffle(cards);
+
+                var Borad = document.getElementById("BD");
+                Borad.innerHTML ="";
+
+
+                for(var i = 1 ; i <cards.length;i++){
+
+                    var newcard = document.createElement("img");
+                    newcard.width = 100;
+                    newcard.height = 150;
+                    newcard.id = "card=" + i;
+                    newcard.src = "imge/backCard.jpg";
+                    newcard.addEventListener('click' , function(){
+
+                        check(this);
+                    });
+
+                    Borad.appendChild(newcard);
+
+                }
+            }
+
+
+            function check(elem){
+
+                stnum = elem.id;
+                sp = stnum.split("=");
+                numimge = Number(sp[1]);
+
+
+
+
+
+
+                if(move%2 == 0){
+
+
+
+
+                    elem.src = "imge/" + cards[numimge];
+
+
+                    onecard = numimge;
+                    onecard1 = cards[numimge];
+                }else{
+
+                    elem.src = "imge/" + cards[numimge];
+                    twocard= cards[numimge];
+
+
+                    if(onecard1 == twocard){
+                        elem.src = "imge/" + cards[numimge];
+
+                    }else{
+                        setTimeout(function(){
+
+                            elem.src = "imge/backCard.jpg";
+
+
+
+                            onedone = "card="+ onecard;
+                            console.log(onedone);
+                            document.getElementById(onedone).src = "imge/backCard.jpg";
+
+
+                        },500);
+
+                    }
+                }
+
+                move++;
+            }
+
+            function shuffle(shuff){
+                var numrandom;
+                var num1;
+                for(i = shuff.length -1; i>0; i--){
+                    numrandom = Math.floor(Math.random()*i);
+
+                    num1 = shuff[i];
+                    shuff[i] = shuff[numrandom];
+                    shuff[numrandom] = num1;
+
+
+                }
+                return(shuff);
+            }
+
+
+        </script>
+
+
+
+    </head>
+    <body>
+
+
+        <input type="button" onclick="prin()" value="start">
+        <div id="BD"></div>
+
+    </body>
+</html>
